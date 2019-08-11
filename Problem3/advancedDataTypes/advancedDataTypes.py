@@ -24,18 +24,15 @@ Solution is checking if both list and tuple have all members of set by using `fo
 """
 
 
-def SameSetOfNumber(my_list, my_tuple, my_set):
+def same_set_of_number(my_list, my_tuple, my_set):
     if len(my_set) != len(my_tuple) or len(my_list) != len(my_set):
         return False
     else:
-        count_same_number = 0
         for item in my_set:
-            if item in my_list and item in my_tuple:
-                count_same_number += 1
-        if count_same_number == len(my_set):
-            return True
+            if item not in my_list or item not in my_tuple:
+                return False
         else:
-            return False
+            return True
 
 
 print(a)
@@ -43,4 +40,4 @@ print(b)
 print(c)
 
 print('\nDo these list, tuple and set above contain the same set of number?')
-print(SameSetOfNumber(a, b, c))
+print(same_set_of_number(a, b, c))
