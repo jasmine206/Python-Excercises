@@ -59,5 +59,9 @@ class FileController:
 file_controller = FileController()
 config = file_controller.read_file("data.json")
 
+# update values in a dict
+storefrontConfig = StorefrontConfig()
+updated_dict = storefrontConfig.update(config)
+
 # write into a json file
 file_controller.write_file(config, 'result.json')
