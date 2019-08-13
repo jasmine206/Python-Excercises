@@ -15,7 +15,7 @@ The result should be true.
 
 a = [1, 2, 3, 4, 5, 6, 7, 8]
 b = (3, 4, 1, 2, 7, 6, 5, 8)
-c = {5, 6, 7, 8, 1, 2, 3, 4, 4}
+c = {5, 6, 7, 8, 1, 2, 4, 4, 4}
 
 
 """
@@ -31,8 +31,7 @@ def same_set_of_number(my_list, my_tuple, my_set):
         for item in my_set:
             if item not in my_list or item not in my_tuple:
                 return False
-        else:
-            return True
+        return True
 
 
 print(a)
