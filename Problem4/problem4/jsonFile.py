@@ -1,6 +1,8 @@
 import json
 import time
 
+from Problem4.problem4.Storefront import Storefront
+
 modify_data = {
     "expiration_time": 200,
     "product": "qchat",
@@ -36,11 +38,17 @@ modify_data = {
 
 
 class StorefrontConfig:
+    storefront = {}
+
     def __init__(self, _object):
-        self.object = _object
+        self.update(_object)
 
     def update(self, modify_data_dict):
-        self.object.update(modify_data_dict)
+        self.__dict__.update(modify_data_dict)
+        self.storefront = Storefront(self.storefront)
+
+    def toObject(self):
+        return self.__dict__
 
 
 class FileController:
@@ -51,7 +59,7 @@ class FileController:
 
     def write_file(self, storefront_config, json_file_name):
         with open(json_file_name, 'w') as json_file:
-            json.dump(storefront_config.object, json_file)
+            json.dump(storefront_config.toObject(), json_file)
 
 
 # read json file
@@ -60,6 +68,7 @@ config = file_controller.read_file("data.json")
 
 # update
 config.update(modify_data)
+print(config.storefront.purchase_options)
 
 # write into a json file
-file_controller.write_file(config, 'result.json')
+# file_controller.write_file(config, 'result.json')
