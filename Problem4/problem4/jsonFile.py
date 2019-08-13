@@ -2,6 +2,7 @@ import json
 import time
 
 from Problem4.problem4.Storefront import Storefront
+from Problem4.problem4.serializable import Serializable
 
 modify_data = {
     "expiration_time": 200,
@@ -37,7 +38,7 @@ modify_data = {
 }
 
 
-class StorefrontConfig:
+class StorefrontConfig(Serializable):
     storefront = {}
 
     def __init__(self, _object):
@@ -46,9 +47,6 @@ class StorefrontConfig:
     def update(self, modify_data_dict):
         self.__dict__.update(modify_data_dict)
         self.storefront = Storefront(self.storefront)
-
-    def toObject(self):
-        return self.__dict__
 
 
 class FileController:
@@ -68,7 +66,7 @@ config = file_controller.read_file("data.json")
 
 # update
 config.update(modify_data)
-print(config.storefront.purchase_options)
+print(config.storefront.purchase_options[0].button_text)
 
 # write into a json file
-# file_controller.write_file(config, 'result.json')
+file_controller.write_file(config, 'result.json')
