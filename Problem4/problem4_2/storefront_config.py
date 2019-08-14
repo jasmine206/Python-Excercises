@@ -24,7 +24,7 @@ class PurchaseOption:
         self.team_type = my_purchase_dict.get('team_type')
         self.frequency = my_purchase_dict.get('frequency')
 
-    def update(self, purchase_data):
+    def update_purchase(self, purchase_data):
         self.button_text = purchase_data.get('button_text', self.button_text)
         self.description = purchase_data.get('description', self.description)
         self.id = purchase_data.get('id', self.id)
@@ -60,17 +60,15 @@ class Storefront:
             purchase_options[index] = PurchaseOption(value)
         self.purchase_options = purchase_options
 
-    def update(self, storefront_data):
+    def update_storefront(self, storefront_data):
         self.banner_enabled = storefront_data.get('banner_enabled', self.banner_enabled)
         self.banner_text = storefront_data.get('banner_text', self.banner_text)
         self.banner_enabled = storefront_data.get('banner_enabled', self.banner_enabled)
         self.description = storefront_data.get('description', self.description)
         self.enabled = storefront_data.get('enabled', self.enabled)
 
-        options_update = storefront_data['purchase_options']
-        for index, value in enumerate(options_update):
-            options_update[index] = PurchaseOption(value)
-        self.purchase_options = options_update
+        for index, value in enumerate(storefront_data['purchase_options']):
+            self.purchase_options[index].update_purchase(value)
 
     def to_dict(self):
         storefront_data = self.__dict__.copy()
@@ -89,11 +87,11 @@ class StorefrontConfig:
         self.utm_campaign = storefront_config_dict.get('utm_campaign')
         self.utm_source = storefront_config_dict.get('utm_source')
 
-    def update(self, storefront_config_data):
+    def update_storefront_config(self, storefront_config_data):
         self.expiration_time = storefront_config_data.get('expiration_time', self.expiration_time)
         self.id = storefront_config_data.get('id', self.id)
         self.product = storefront_config_data.get('product', self.product)
-        self.storefront.update(storefront_config_data.get('storefront', self.storefront))
+        self.storefront.update_storefront(storefront_config_data.get('storefront', self.storefront))
         self.utm_campaign = storefront_config_data.get('utm_campaign', self.utm_campaign)
         self.utm_source = storefront_config_data.get('utm_source', self.utm_source)
 

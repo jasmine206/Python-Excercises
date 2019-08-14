@@ -52,9 +52,7 @@ file_controller = FileController()
 config = file_controller.read_file("data2.json")
 
 # update
-config.update(modify_data)
-# print(config.storefront.purchase_options[0].button_text)
+config.update_storefront_config(modify_data)
 
 # write into a json file
 file_controller.write_file(config, 'result.json')
-
